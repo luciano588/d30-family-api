@@ -18,6 +18,7 @@ class FamilyStructure:
                 "id": self._generateId(),
                 "first_name": "John",
                 "last_name": last_name,
+                "lucky_number": [1]
 
             },
              {
@@ -45,8 +46,12 @@ class FamilyStructure:
     def add_member(self, member):
         # fill this method and update the return
         # Add a new object to an array
-        if  member["id"] is None:
-            member["id"] = self._generateId()
+        # if  member["id"] is None:
+        #     member["id"] = self._generateId()
+
+        if "id" not in member:
+            member.update(id=self._generateId())
+
         member["last_name"]= self.last_name
         self._member.append(member)
         return member
@@ -74,15 +79,20 @@ class FamilyStructure:
     def get_member(self, id):
         # fill this method and update the return
         member = {}
-        try:
-            for x in self._members:
-                if x["id"] == id:
-                    member = x
-        except:
-            member = {
-                "Status": "Not Found"
-            }
-        
+        # try:
+        #     for x in self._members:
+        #         if x["id"] == id:
+        #             member = x
+        # except:
+        #     member = {
+        #         "Status": "Not Found"
+        #     }
+        for i,x in enumerate(self._members):
+            if x["id"]== id:
+                member= x  
+                break 
+            else:
+                member= False
         return member
 
     # this method is done, it returns a list with all the family members
